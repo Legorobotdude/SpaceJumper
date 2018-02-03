@@ -8,11 +8,12 @@ public class Rocket : MonoBehaviour {
 
     Rigidbody rigidBody;
     AudioSource audioSource;
-    [SerializeField]
-    float mainThrust = 100f;
-    [SerializeField]
-    float rcsThrust = 100f;
-   
+    [SerializeField] float mainThrust = 100f;
+    [SerializeField] float rcsThrust = 100f;
+    [SerializeField] AudioClip mainEngine;
+    [SerializeField] AudioClip deathSound;
+    [SerializeField] AudioClip winSound;
+
     enum State { Alive,Dying, Transcending}
     State state = State.Alive;
 
@@ -32,10 +33,10 @@ public class Rocket : MonoBehaviour {
         }
         if (state == State.Dying)
         {
-            if (audioSource.isPlaying)
-            {
-                audioSource.Stop();
-            }
+            //if (audioSource.isPlaying)
+            //{
+            //    audioSource.Stop();
+            //}
 
         }
         
@@ -48,7 +49,7 @@ public class Rocket : MonoBehaviour {
             rigidBody.AddRelativeForce(Vector3.up*mainThrust);
             if (!audioSource.isPlaying)
             {
-                audioSource.Play();
+                audioSource.PlayOneShot(mainEngine);
             }
 
 
@@ -85,6 +86,13 @@ public class Rocket : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
+
+
+        if (state != State.Alive)
+        {
+            return;
+        }
+
         switch (collision.gameObject.tag)
         {
             case "Friendly":
@@ -105,6 +113,7 @@ public class Rocket : MonoBehaviour {
             default:
                 {
                     state = State.Dying;
+                    audioSource.PlayOneShot(deathSound);
                     //Die();
                     Invoke("Die", 1f);
                     break;

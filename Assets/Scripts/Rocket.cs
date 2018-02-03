@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Rocket : MonoBehaviour {
 
@@ -12,6 +13,8 @@ public class Rocket : MonoBehaviour {
     [SerializeField]
     float rcsThrust = 100f;
    
+    enum State { Alive,Dying, Transcending}
+    State state = State.Alive;
 
     // Use this for initialization
     void Start () {
@@ -81,9 +84,15 @@ public class Rocket : MonoBehaviour {
                 {
                     break;
                 }
-            default:
+            case "Finish":
                 {
 
+                    SceneManager.LoadScene(2);
+                    break;
+                }
+            default:
+                {
+                    SceneManager.LoadScene(1);
                     break;
                 }
 

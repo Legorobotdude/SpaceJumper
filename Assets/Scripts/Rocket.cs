@@ -25,8 +25,20 @@ public class Rocket : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        Thrust();
-        Rotate();
+        if (state == State.Alive)
+        {
+            Thrust();
+            Rotate();
+        }
+        if (state == State.Dying)
+        {
+            if (audioSource.isPlaying)
+            {
+                audioSource.Stop();
+            }
+
+        }
+        
     }
 
     private void Thrust()
@@ -86,17 +98,28 @@ public class Rocket : MonoBehaviour {
                 }
             case "Finish":
                 {
-
-                    SceneManager.LoadScene(2);
+                    state = State.Transcending;
+                    Invoke("LoadNextScene",1f);
                     break;
                 }
             default:
                 {
-                    SceneManager.LoadScene(1);
+                    state = State.Dying;
+                    //Die();
+                    Invoke("Die", 1f);
                     break;
                 }
 
         }
     }
 
+    private void Die()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    private void LoadNextScene()
+    {
+        SceneManager.LoadScene(2);
+    }
 }

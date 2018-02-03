@@ -107,12 +107,15 @@ public class Rocket : MonoBehaviour {
             case "Finish":
                 {
                     state = State.Transcending;
+                    audioSource.Stop();
+                    audioSource.PlayOneShot(winSound);
                     Invoke("LoadNextScene",1f);
                     break;
                 }
             default:
                 {
                     state = State.Dying;
+                    audioSource.Stop();
                     audioSource.PlayOneShot(deathSound);
                     //Die();
                     Invoke("Die", 1f);

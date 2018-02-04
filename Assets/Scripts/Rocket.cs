@@ -132,34 +132,44 @@ public class Rocket : MonoBehaviour {
                 }
             case "Finish":
                 {
-                    state = State.Transcending;
-                    audioSource.Stop();
-                    audioSource.PlayOneShot(winSound);
-                    winParticles.Play();
-                    Invoke("LoadNextScene",levelLoadTime);
+                    Win();
                     break;
                 }
             default:
                 {
-                    state = State.Dying;
-                    audioSource.Stop();
-                    audioSource.PlayOneShot(deathSound);
-                    deathParticles.Play();
-                    //Todo: Reanable all rigidbody rotation
-                    Invoke("Die", levelLoadTime);
+                    Die();
                     break;
                 }
 
         }
     }
 
+    private void Win()
+    {
+        state = State.Transcending;
+        audioSource.Stop();
+        audioSource.PlayOneShot(winSound);
+        winParticles.Play();
+        Invoke("LoadNextScene", levelLoadTime);
+    }
+
     private void Die()
     {
-        SceneManager.LoadScene(1);
+        state = State.Dying;
+        audioSource.Stop();
+        audioSource.PlayOneShot(deathSound);
+        deathParticles.Play();
+        //Todo: Reanable all rigidbody rotation
+        Invoke("ReloadScene", levelLoadTime);
+    }
+
+    private void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void LoadNextScene()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
     }
 }

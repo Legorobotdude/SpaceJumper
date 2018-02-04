@@ -10,6 +10,9 @@ public class Rocket : MonoBehaviour {
     AudioSource audioSource;
     [SerializeField] float mainThrust = 100f;
     [SerializeField] float rcsThrust = 100f;
+
+    [SerializeField] float levelLoadTime = 1f;
+
     [SerializeField] AudioClip mainEngine;
     [SerializeField] AudioClip deathSound;
     [SerializeField] AudioClip winSound;
@@ -50,7 +53,7 @@ public class Rocket : MonoBehaviour {
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            rigidBody.AddRelativeForce(Vector3.up*mainThrust);
+            rigidBody.AddRelativeForce(Vector3.up*mainThrust*Time.deltaTime);
             if (!audioSource.isPlaying)
             {
                 audioSource.PlayOneShot(mainEngine);
@@ -115,7 +118,7 @@ public class Rocket : MonoBehaviour {
                     audioSource.Stop();
                     audioSource.PlayOneShot(winSound);
                     winParticles.Play();
-                    Invoke("LoadNextScene",1f);
+                    Invoke("LoadNextScene",levelLoadTime);
                     break;
                 }
             default:
@@ -124,8 +127,8 @@ public class Rocket : MonoBehaviour {
                     audioSource.Stop();
                     audioSource.PlayOneShot(deathSound);
                     deathParticles.Play();
-                    //Die();
-                    Invoke("Die", 1f);
+                    //Todo: Reanable all rigidbody rotation
+                    Invoke("Die", levelLoadTime);
                     break;
                 }
 

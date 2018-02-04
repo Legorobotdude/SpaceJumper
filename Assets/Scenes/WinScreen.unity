@@ -43,7 +43,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -89,7 +89,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000002, guid: cb4ebfad29730fa4eab78564a8750a4a,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -172,6 +173,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 127.03571
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 2e9197575aa3442408fa1794a25c35ee, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2e9197575aa3442408fa1794a25c35ee, type: 3}
   m_IsPrefabParent: 0
@@ -222,6 +227,10 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 135
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 812c64ca63491e4458ee180a7840f868, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 812c64ca63491e4458ee180a7840f868, type: 3}
   m_IsPrefabParent: 0
@@ -263,6 +272,10 @@ Prefab:
     - target: {fileID: 4554197261745832, guid: 172e566aac256834e927228ba18ba98e, type: 2}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1075556588741174, guid: 172e566aac256834e927228ba18ba98e, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 172e566aac256834e927228ba18ba98e, type: 2}
@@ -681,6 +694,10 @@ Prefab:
     - target: {fileID: 4564531005252844, guid: 3745fc451423b244a9bfa0e7f812cc1d, type: 2}
       propertyPath: m_RootOrder
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1335606632375732, guid: 3745fc451423b244a9bfa0e7f812cc1d, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3745fc451423b244a9bfa0e7f812cc1d, type: 2}

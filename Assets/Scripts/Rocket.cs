@@ -21,10 +21,16 @@ public class Rocket : MonoBehaviour {
     [SerializeField] ParticleSystem deathParticles;
     [SerializeField] ParticleSystem winParticles;
 
+    [SerializeField] bool mobileControls = false;
+   
+
     enum State { Alive,Dying, Transcending}
     State state = State.Alive;
 
     bool collisionsDisabled = false;
+
+    public bool Thrusting = false;
+    public int turning = 0;
 
     // Use this for initialization
     void Start () {
@@ -35,19 +41,52 @@ public class Rocket : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (state == State.Alive)
+        if (state == State.Alive && !mobileControls)
         {
             Thrust();
             Rotate();
         }
-        if (state == State.Dying)
+        else if (mobileControls)
         {
-            //if (audioSource.isPlaying)
-            //{
-            //    audioSource.Stop();
-            //}
+            if (Thrusting)
+            {
+                rigidBody.AddRelativeForce(Vector3.up * mainThrust * Time.deltaTime);
+                if (!audioSource.isPlaying)
+                {
+                    audioSource.PlayOneShot(mainEngine);
+                }
+                mainEngineParticles.Play();
+            }
+            else
+            {
+                audioSource.Stop();
+                mainEngineParticles.Stop();
+            }
+            if (turning == 1)
+            {
+                float rotationThisFrame = rcsThrust * Time.deltaTime;
 
+                rigidBody.angularVelocity = Vector3.zero;
+
+                transform.Rotate(Vector3.forward * rotationThisFrame);
+            }
+            else if (turning == -1)
+            {
+                float rotationThisFrame = rcsThrust * Time.deltaTime;
+
+                rigidBody.angularVelocity = Vector3.zero;
+
+                transform.Rotate(-Vector3.forward * rotationThisFrame);
+            }
         }
+        //if (state == State.Dying)
+        //{
+        //    //if (audioSource.isPlaying)
+        //    //{
+        //    //    audioSource.Stop();
+        //    //}
+
+        //}
         if (Debug.isDebugBuild)
         {
             RespondToDebugKeys();
@@ -75,7 +114,24 @@ public class Rocket : MonoBehaviour {
 
         }
     }
+    public void ThrustMobile()
+    {
 
+        Thrusting = true;
+
+        
+        //else
+        //{
+        //    audioSource.Stop();
+        //    mainEngineParticles.Stop();
+
+        //}
+    }
+    public void CancelThrustMobile()
+    {
+
+        Thrusting = false;
+    }
     private void Rotate()
     {
         
@@ -98,6 +154,24 @@ public class Rocket : MonoBehaviour {
         }
 
         //rigidBody.freezeRotation = false;
+    }
+    public void RotateLeftMobile()
+    {
+        turning = 1;
+       
+
+
+    }
+    public void RotateRightMobile()
+    {
+
+        turning = -1;
+
+
+    }
+    public void cancelTurningMobile()
+    {
+        turning = 0;
     }
 
     private void RespondToDebugKeys()

@@ -46,7 +46,7 @@ public class Rocket : MonoBehaviour {
             Thrust();
             Rotate();
         }
-        else if (mobileControls)
+        else if (state == State.Alive && mobileControls)
         {
             if (Thrusting)
             {
@@ -119,13 +119,6 @@ public class Rocket : MonoBehaviour {
 
         Thrusting = true;
 
-        
-        //else
-        //{
-        //    audioSource.Stop();
-        //    mainEngineParticles.Stop();
-
-        //}
     }
     public void CancelThrustMobile()
     {
@@ -136,7 +129,6 @@ public class Rocket : MonoBehaviour {
     {
         
         float rotationThisFrame = rcsThrust * Time.deltaTime;
-        //rigidBody.freezeRotation = true;
         rigidBody.angularVelocity = Vector3.zero;
 
         if (Input.GetKey(KeyCode.A))
@@ -153,21 +145,19 @@ public class Rocket : MonoBehaviour {
 
         }
 
-        //rigidBody.freezeRotation = false;
+        
     }
     public void RotateLeftMobile()
     {
         turning = 1;
        
 
-
     }
     public void RotateRightMobile()
     {
 
         turning = -1;
-
-
+        
     }
     public void cancelTurningMobile()
     {

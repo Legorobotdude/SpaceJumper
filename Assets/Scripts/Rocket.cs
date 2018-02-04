@@ -80,7 +80,8 @@ public class Rocket : MonoBehaviour {
     {
         
         float rotationThisFrame = rcsThrust * Time.deltaTime;
-        rigidBody.freezeRotation = true;
+        //rigidBody.freezeRotation = true;
+        rigidBody.angularVelocity = Vector3.zero;
 
         if (Input.GetKey(KeyCode.A))
         {
@@ -96,7 +97,7 @@ public class Rocket : MonoBehaviour {
 
         }
 
-        rigidBody.freezeRotation = false;
+        //rigidBody.freezeRotation = false;
     }
 
     private void RespondToDebugKeys()

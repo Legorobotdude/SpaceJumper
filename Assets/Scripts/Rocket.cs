@@ -24,6 +24,8 @@ public class Rocket : MonoBehaviour {
     enum State { Alive,Dying, Transcending}
     State state = State.Alive;
 
+    bool collisionsDisabled = false;
+
     // Use this for initialization
     void Start () {
         rigidBody = GetComponent<Rigidbody>();
@@ -46,7 +48,12 @@ public class Rocket : MonoBehaviour {
             //}
 
         }
-        
+        if (Debug.isDebugBuild)
+        {
+            RespondToDebugKeys();
+        }
+
+
     }
 
     private void Thrust()
@@ -92,11 +99,22 @@ public class Rocket : MonoBehaviour {
         rigidBody.freezeRotation = false;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void RespondToDebugKeys()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            LoadNextScene();
+        }
+        else if (Input.GetKeyDown(KeyCode.C))
+        {
+            collisionsDisabled = !collisionsDisabled; // toggle
+        }
+    }
+        private void OnCollisionEnter(Collision collision)
     {
 
 
-        if (state != State.Alive)
+        if (state != State.Alive || collisionsDisabled)
         {
             return;
         }

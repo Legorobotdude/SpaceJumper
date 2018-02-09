@@ -13,6 +13,9 @@ public class Rocket : MonoBehaviour {
 
     [SerializeField] float levelLoadTime = 1f;
 
+    [SerializeField] float maxLandingVelocity = 10f;
+    [SerializeField] float GravityValue = 9.80665f;
+
     [SerializeField] AudioClip mainEngine;
     [SerializeField] AudioClip deathSound;
     [SerializeField] AudioClip winSound;
@@ -21,6 +24,7 @@ public class Rocket : MonoBehaviour {
     [SerializeField] ParticleSystem deathParticles;
     [SerializeField] ParticleSystem winParticles;
 
+    
     enum State { Alive,Dying, Transcending}
     State state = State.Alive;
 
@@ -30,7 +34,9 @@ public class Rocket : MonoBehaviour {
     void Start () {
         rigidBody = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
-	}
+
+        Physics.gravity = new Vector3(0, -GravityValue, 0);//Set the value of gravity
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -123,7 +129,10 @@ public class Rocket : MonoBehaviour {
         {
             case "Friendly":
                 {
-
+                    if(rigidBody.velocity.magnitude >= maxLandingVelocity)
+                    {
+                        Die();
+                    }
                     break;
                 }
             case "Fuel":
@@ -132,7 +141,14 @@ public class Rocket : MonoBehaviour {
                 }
             case "Finish":
                 {
-                    Win();
+                    if (rigidBody.velocity.magnitude < maxLandingVelocity)
+                    {
+                        Win();
+                    }
+                    else
+                    {
+                        Die();
+                    }
                     break;
                 }
             default:

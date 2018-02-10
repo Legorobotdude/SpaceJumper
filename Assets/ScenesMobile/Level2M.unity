@@ -808,15 +808,6 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1.2573103
       objectReference: {fileID: 0}
-    - target: {fileID: 114464815941314502, guid: d93c3ac2730a8d944997b61e959925bf,
-        type: 2}
-      propertyPath: mobileControls
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1603461513795886, guid: d93c3ac2730a8d944997b61e959925bf, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d93c3ac2730a8d944997b61e959925bf, type: 2}
   m_IsPrefabParent: 0

@@ -559,15 +559,6 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 258848512}
-    - target: {fileID: 114739615009168276, guid: 204b9309bad371744adfeb4d5e74a019,
-        type: 2}
-      propertyPath: mobileControls
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1097944868529130, guid: 204b9309bad371744adfeb4d5e74a019, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 204b9309bad371744adfeb4d5e74a019, type: 2}
   m_IsPrefabParent: 0

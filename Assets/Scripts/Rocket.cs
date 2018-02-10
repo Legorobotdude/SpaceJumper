@@ -13,6 +13,8 @@ public class Rocket : MonoBehaviour {
 
     [SerializeField] float levelLoadTime = 1f;
 
+    [SerializeField] float maxLandingVelocity = 10f;
+
     [SerializeField] AudioClip mainEngine;
     [SerializeField] AudioClip deathSound;
     [SerializeField] AudioClip winSound;
@@ -197,7 +199,14 @@ public class Rocket : MonoBehaviour {
                 }
             case "Finish":
                 {
-                    Win();
+                    if (rigidBody.velocity.magnitude < maxLandingVelocity)
+                    {
+                        Win();
+                    }
+                    else
+                    {
+                        Die();
+                    }
                     break;
                 }
             default:
@@ -224,7 +233,7 @@ public class Rocket : MonoBehaviour {
         audioSource.Stop();
         audioSource.PlayOneShot(deathSound);
         deathParticles.Play();
-        //Todo: Reanable all rigidbody rotation
+        rigidBody.constraints = RigidbodyConstraints.None;
         Invoke("ReloadScene", levelLoadTime);
     }
 
